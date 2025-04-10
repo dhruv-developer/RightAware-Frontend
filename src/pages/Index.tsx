@@ -160,13 +160,13 @@ const Index = () => {
                   Our platform combines technology and legal expertise to make the legal system more accessible to everyone, regardless of their background or resources.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <div className="bg-white dark:bg-muted/40 p-4 rounded-lg shadow-sm">
                     <h3 className="font-medium text-lg">Our Vision</h3>
                     <p className="text-sm text-foreground/70 mt-1">
                       A society where every citizen is aware of their legal rights and can confidently navigate the legal system.
                     </p>
                   </div>
-                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <div className="bg-white dark:bg-muted/40 p-4 rounded-lg shadow-sm">
                     <h3 className="font-medium text-lg">Our Mission</h3>
                     <p className="text-sm text-foreground/70 mt-1">
                       To provide accessible, accurate legal information and tools that help citizens take informed legal action.
