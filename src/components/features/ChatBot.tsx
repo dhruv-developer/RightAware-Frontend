@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
+import { franc } from 'franc-min';
+
 
 type Message = {
   id: string;
@@ -32,44 +34,61 @@ const ChatBot = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!inputMessage.trim()) return;
-    
-    // Add user message
+  
     const userMessage: Message = {
       id: Date.now().toString(),
       content: inputMessage,
       sender: 'user',
       timestamp: new Date(),
     };
-    
-    setMessages([...messages, userMessage]);
+  
+    setMessages((prev) => [...prev, userMessage]);
     setInputMessage('');
     setIsLoading(true);
-    
-    // Simulate AI response after 1-2 seconds
-    setTimeout(() => {
-      const botResponses = [
-        "To file an FIR, you can visit the nearest police station in the jurisdiction where the incident occurred. Under Section 154 of the Criminal Procedure Code, the police are obligated to register your FIR for a cognizable offense.",
-        "For workplace harassment, you can file a complaint with the Internal Complaints Committee (ICC) at your workplace under the Sexual Harassment of Women at Workplace Act, 2013.",
-        "Consumer disputes under ₹20 lakhs can be filed at the District Consumer Disputes Redressal Forum as per the Consumer Protection Act, 2019.",
-        "Under the Motor Vehicles Act, if you're in an accident, you should report it to the nearest police station within 24 hours and can claim compensation through the Motor Accident Claims Tribunal."
-      ];
-      
+  
+    // Language detection
+    const langCode = franc(inputMessage);
+    const detectedLang = langCode === 'hin' ? 'Hindi' : langCode === 'eng' ? 'English' : 'English'; // Fallback to English
+  
+    try {
+      const res = await fetch('http://localhost:8000/api/ask-rights', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          situation: inputMessage,
+          state: 'Delhi', // You can auto-fill from dropdown/user profile
+          language: detectedLang,
+        }),
+      });
+  
+      const data = await res.json();
+  
       const botMessage: Message = {
         id: Date.now().toString(),
-        content: botResponses[Math.floor(Math.random() * botResponses.length)],
+        content: data.data || "I'm sorry, I couldn't find legal info for that.",
         sender: 'bot',
         timestamp: new Date(),
       };
-      
-      setMessages(prevMessages => [...prevMessages, botMessage]);
+  
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error fetching response:', error);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          content: "⚠️ Sorry, I couldn't process your request right now. Please try again later.",
+          sender: 'bot',
+          timestamp: new Date(),
+        },
+      ]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
-
   // Auto scroll to bottom on new messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
