@@ -9,16 +9,17 @@ import LawExplorer from '@/components/features/LawExplorer';
 import LegalAid from '@/components/features/LegalAid';
 import Footer from '@/components/sections/Footer';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import ChatPreview from '@/components/sections/ChatPreview';
 
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
+
       <main className="flex-1">
         <Hero />
         <FeatureHighlights />
-        
+
         {/* Detailed Feature Sections */}
         <section className="py-16 px-4">
           <div className="container mx-auto">
@@ -28,7 +29,7 @@ const Index = () => {
                 Comprehensive tools to help you understand your rights and take informed legal action
               </p>
             </div>
-            
+
             <Tabs defaultValue="navigator" className="w-full">
               <TabsList className="grid grid-cols-2 md:grid-cols-5 mb-8">
                 <TabsTrigger value="navigator">Rights Navigator</TabsTrigger>
@@ -37,7 +38,7 @@ const Index = () => {
                 <TabsTrigger value="legalaid">Legal Aid</TabsTrigger>
                 <TabsTrigger value="emergency">Emergency Mode</TabsTrigger>
               </TabsList>
-              
+
               <TabsContent value="navigator" className="space-y-4">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                   <div className="space-y-4">
@@ -66,29 +67,28 @@ const Index = () => {
                       </li>
                     </ul>
                   </div>
-                  
-                  <div className="bg-muted p-4 rounded-lg flex items-center justify-center" style={{ height: '400px' }}>
-                    <p className="text-muted-foreground">Chat interface preview appears here</p>
-                    {/* ChatBot interface would be visible here in production */}
+
+                  <div className="p-4 rounded-lg flex items-center justify-center" style={{ height: '400px' }}>
+                    <ChatPreview />
                   </div>
                 </div>
               </TabsContent>
-              
+
               <TabsContent value="document">
                 <DocumentGenerator />
               </TabsContent>
-              
+
               <TabsContent value="laws">
                 <LawExplorer />
               </TabsContent>
-              
+
               <TabsContent value="legalaid">
                 <LegalAid />
               </TabsContent>
-              
+
               <TabsContent value="emergency" className="space-y-4">
-                <div className="bg-red-50 border border-red-200 p-6 rounded-lg">
-                  <h3 className="text-2xl font-bold text-emergency-red mb-4">Emergency Mode</h3>
+              <div className="bg-red-50 dark:bg-red-800 dark:border-red-700 border border-red-200 p-6 rounded-lg text-red-900 dark:text-red-50">
+                  <h3 className="text-2xl font-bold text-emergency-red dark:text-red-200 mb-4">Emergency Mode</h3>
                   <p className="mb-4">
                     When you're in an emergency situation, the Emergency Mode provides immediate guidance,
                     location sharing, and direct contact with authorities.
@@ -98,43 +98,43 @@ const Index = () => {
                       <h4 className="font-medium">Key Features:</h4>
                       <ul className="space-y-2">
                         <li className="flex items-start">
-                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 flex items-center justify-center mr-2 mt-0.5">
-                            <span className="text-emergency-red font-medium">1</span>
+                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 dark:bg-red-700 flex items-center justify-center mr-2 mt-0.5">
+                            <span className="text-emergency-red font-medium dark:text-red-100">1</span>
                           </div>
                           <span>One-tap emergency contacts for police, ambulance, and helplines</span>
                         </li>
                         <li className="flex items-start">
-                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 flex items-center justify-center mr-2 mt-0.5">
-                            <span className="text-emergency-red font-medium">2</span>
+                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 dark:bg-red-700 flex items-center justify-center mr-2 mt-0.5">
+                            <span className="text-emergency-red font-medium dark:text-red-100">2</span>
                           </div>
                           <span>Share your exact location with emergency services</span>
                         </li>
                         <li className="flex items-start">
-                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 flex items-center justify-center mr-2 mt-0.5">
-                            <span className="text-emergency-red font-medium">3</span>
+                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 dark:bg-red-700 flex items-center justify-center mr-2 mt-0.5">
+                            <span className="text-emergency-red font-medium dark:text-red-100">3</span>
                           </div>
                           <span>Quick guidance for common emergency situations</span>
                         </li>
                       </ul>
                     </div>
                     <div className="space-y-3">
-                      <h4 className="font-medium">When to Use:</h4>
+                      <h4 className="font-medium dark:text-red-100">When to Use:</h4>
                       <ul className="space-y-2">
                         <li className="flex items-start">
-                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 flex items-center justify-center mr-2 mt-0.5">
-                            <span className="text-emergency-red font-medium">•</span>
+                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 dark:bg-red-700 flex items-center justify-center mr-2 mt-0.5">
+                            <span className="text-emergency-red font-medium dark:text-red-100">•</span>
                           </div>
                           <span>When you feel unsafe or threatened</span>
                         </li>
                         <li className="flex items-start">
-                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 flex items-center justify-center mr-2 mt-0.5">
-                            <span className="text-emergency-red font-medium">•</span>
+                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 dark:bg-red-700 flex items-center justify-center mr-2 mt-0.5">
+                            <span className="text-emergency-red font-medium dark:text-red-100">•</span>
                           </div>
                           <span>During accidents or medical emergencies</span>
                         </li>
                         <li className="flex items-start">
-                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 flex items-center justify-center mr-2 mt-0.5">
-                            <span className="text-emergency-red font-medium">•</span>
+                          <div className="w-6 h-6 rounded-full bg-emergency-red/10 dark:bg-red-700 flex items-center justify-center mr-2 mt-0.5">
+                            <span className="text-emergency-red font-medium dark:text-red-100">•</span>
                           </div>
                           <span>When witnessing a crime</span>
                         </li>
@@ -146,7 +146,7 @@ const Index = () => {
             </Tabs>
           </div>
         </section>
-        
+
         {/* About Section */}
         <section id="about" className="py-16 px-4 bg-muted/30">
           <div className="container mx-auto">
@@ -174,7 +174,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="space-y-6">
                 <div className="gradient-border bg-card p-6 rounded-lg">
                   <h3 className="font-medium text-xl mb-4">Why Choose RightAware?</h3>
@@ -213,9 +213,9 @@ const Index = () => {
           </div>
         </section>
       </main>
-      
+
       <Footer />
-      
+
       {/* Floating Elements */}
       <ChatBot />
       <EmergencyButton />
